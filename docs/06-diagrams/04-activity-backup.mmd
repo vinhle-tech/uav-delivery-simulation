@@ -1,0 +1,14 @@
+flowchart TD
+  A(["Bắt đầu"]) --> B["Tiếp nhận đơn"]
+  B --> C{"Đủ tải, pin, phạm vi?"}
+  C -- Không --> D["Từ chối / sửa kế hoạch"]
+  C -- Có --> E["Phân công UAV"]
+  E --> F["Preflight & Takeoff"]
+  F --> G["Bay đến điểm giao"]
+  G --> H["Hạ cánh an toàn"]
+  H --> I{"Nhận hàng thành công?"}
+  I -- Có --> J["Ghi nhận giao thành công"]
+  I -- Không --> K["Ghi nhận giao thất bại"]
+  J --> L["UAV quay về"]
+  K --> L
+  L --> M(["Kết thúc nhiệm vụ"])

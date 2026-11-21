@@ -1,0 +1,67 @@
+
+flowchart TD
+    A(["Bắt đầu"])
+    B["Tiếp nhận đơn hàng"]
+    C{"Thông tin đơn hợp lệ?"}
+
+    C1["Yêu cầu sửa thông tin"]
+    D["Tìm UAV phù hợp"]
+    E{"Có UAV đủ điều kiện?"}
+    E1["Đưa đơn về danh sách chờ"]
+
+    F["Lập kế hoạch và tạo Mission READY"]
+    G["Nhân viên gửi lệnh Start"]
+    H{"Kiểm tra trước bay đạt?"}
+    H1["Từ chối cất cánh, ghi lý do"]
+
+    I["UAV cất cánh"]
+    J["Bay theo waypoint"]
+    K{"Có sự cố bay?"}
+
+    L["Tiếp cận điểm giao"]
+    M{"Có thể hạ cánh an toàn?"}
+    N["Hạ cánh và chờ xác nhận"]
+    O{"Xác nhận giao hàng đúng hạn?"}
+
+    P["Order = DELIVERED"]
+    Q["Order = DELIVERY_FAILED"]
+    R["UAV quay về trạm"]
+
+    S["Safety Manager đánh giá sự cố"]
+    S1{"Có thể quay về an toàn?"}
+    S2["Return Home, ghi nhận không giao"]
+    S3["Hạ cánh dự phòng hoặc xử lý khẩn cấp"]
+
+    T{"UAV về trạm an toàn?"}
+    U["Lưu kết quả Mission và lịch sử"]
+    U1["Lưu sự cố và trạng thái kết thúc"]
+    Z(["Kết thúc"])
+
+    A --> B --> C
+    C -- "Không" --> C1
+    C1 --> B
+    C -- "Có" --> D
+    D --> E
+    E -- "Không" --> E1 --> Z
+    E -- "Có" --> F --> G --> H
+
+    H -- "Không" --> H1 --> Z
+    H -- "Có" --> I --> J --> K
+
+    K -- "Có" --> S
+    K -- "Không" --> L
+    L --> M
+
+    M -- "Không" --> S
+    M -- "Có" --> N --> O
+
+    O -- "Có" --> P --> R
+    O -- "Không" --> Q --> R
+
+    S --> S1
+    S1 -- "Có" --> S2 --> T
+    S1 -- "Không" --> S3 --> U1 --> Z
+
+    R --> T
+    T -- "Có" --> U --> Z
+    T -- "Không" --> S3

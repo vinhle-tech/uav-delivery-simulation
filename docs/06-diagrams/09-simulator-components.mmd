@@ -1,0 +1,11 @@
+flowchart TB
+  Command["Validated Command"] --> FC["Virtual Flight Controller"]
+  FC --> FSM["State Machine"]
+  FC --> Nav["Navigation / Waypoints"]
+  FC --> Motion["Motion Model"]
+  Motion --> Sensor["Virtual Sensors"]
+  Motion --> Battery["Battery Model"]
+  Sensor --> Safety["Safety Manager"]
+  Battery --> Safety
+  Safety --> FC
+  FC --> Events["Telemetry + Event Log"]

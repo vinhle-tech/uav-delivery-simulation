@@ -1,0 +1,17 @@
+stateDiagram-v2
+  [*] --> IDLE
+  IDLE --> PRE_FLIGHT: Start
+  PRE_FLIGHT --> TAKEOFF: Passed
+  PRE_FLIGHT --> FAILED: Rejected
+  TAKEOFF --> EN_ROUTE: Height reached
+  EN_ROUTE --> APPROACH: Target near
+  APPROACH --> LANDING: Landing safe
+  LANDING --> HANDOVER: Landed
+  HANDOVER --> RETURN_HOME: Delivery resolved
+  RETURN_HOME --> COMPLETED: At station
+  COMPLETED --> IDLE: Reset
+  EN_ROUTE --> PAUSED: Pause allowed
+  PAUSED --> EN_ROUTE: Resume
+  EN_ROUTE --> EMERGENCY: Critical fault
+  RETURN_HOME --> EMERGENCY: Critical fault
+  EMERGENCY --> FAILED: Terminated

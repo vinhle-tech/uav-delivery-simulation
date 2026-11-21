@@ -1,0 +1,16 @@
+flowchart TB
+  subgraph Clients["Ứng dụng dùng chung nghiệp vụ"]
+    Web["React Web"]
+    Mobile["React + Capacitor"]
+    Desktop["React + Electron"]
+  end
+  Web --> API["Express Backend"]
+  Mobile --> API
+  Desktop --> API
+  API --> Database[(PostgreSQL)]
+  API --> Simulation["Server Simulation Engine"]
+  Simulation --> Database
+  Simulation --> Socket["Socket.IO Realtime"]
+  Socket --> Web
+  Socket --> Mobile
+  Socket --> Desktop

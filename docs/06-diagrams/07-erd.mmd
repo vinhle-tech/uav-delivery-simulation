@@ -1,0 +1,12 @@
+erDiagram
+  USERS ||--o{ ORDERS : creates
+  STATIONS ||--o{ DRONES : hosts
+  DRONE_MODELS ||--o{ DRONES : defines
+  DELIVERY_POINTS ||--o{ ORDERS : receives
+  ORDERS ||--o{ MISSIONS : attempts
+  DRONES ||--o{ MISSIONS : performs
+  MISSIONS ||--o{ WAYPOINTS : routes
+  MISSIONS ||--o{ TELEMETRY : records
+  MISSIONS ||--o{ INCIDENTS : encounters
+  MISSIONS ||--o{ DELIVERY_CONFIRMATIONS : documents
+  DRONES ||--o{ DRONE_EVENTS : emits

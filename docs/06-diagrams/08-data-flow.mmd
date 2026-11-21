@@ -1,0 +1,7 @@
+flowchart LR
+  Operator["Nhân viên"] -->|"Tạo đơn / điều khiển"| API["Backend API"]
+  API -->|"Validate và lưu"| DB[(Database)]
+  API -->|"Command"| Sim["Simulation Engine"]
+  Sim -->|"Events / Telemetry"| Realtime["Socket.IO"]
+  Realtime -->|"Đồng bộ UI"| Operator
+  Sim -->|"Checkpoint"| DB

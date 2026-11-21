@@ -1,0 +1,8 @@
+flowchart TB
+  Browser["Web Browser"] --> Server["Backend + Simulator Host"]
+  Android["Android App - Capacitor"] --> Server
+  Windows["Windows App - Electron"] --> Server
+  Server --> DB[("PostgreSQL Host")]
+  Browser --> Cesium["Cesium / Map Data"]
+  Android --> Cesium
+  Windows --> Cesium

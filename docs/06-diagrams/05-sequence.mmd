@@ -1,0 +1,22 @@
+sequenceDiagram
+  actor Operator as Nhân viên
+  participant UI as Client
+  participant API as Backend
+  participant SIM as Simulator
+  participant DB as PostgreSQL
+  Operator->>UI: Tạo đơn và mission
+  UI->>API: POST /missions
+  API->>DB: Lưu mission READY
+  API-->>UI: Mission ready
+  Operator->>UI: Start
+  UI->>API: POST /missions/:id/start
+  API->>SIM: Start command
+  SIM-->>API: Accepted
+  API-->>UI: ACK
+  loop Each telemetry interval
+    SIM-->>UI: Socket.IO telemetry
+  end
+  Operator->>UI: Xác nhận giao
+  UI->>API: Confirm delivery
+  API->>DB: Lưu trạng thái order
+  SIM->>SIM: Return home
