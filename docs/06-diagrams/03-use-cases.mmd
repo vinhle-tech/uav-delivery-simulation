@@ -1,7 +1,25 @@
+
 flowchart LR
-  Operator["Nhân viên vận hành"] --> Login(["Đăng nhập"])
-  Operator --> Orders(["Quản lý đơn hàng"])
-  Operator --> Drones(["Quản lý UAV"])
-  Operator --> Missions(["Lập nhiệm vụ"])
-  Operator --> Flight(["Điều khiển chuyến bay"])
-  Operator --> Reports(["Xem lịch sử và cảnh báo"])
+    NV["Nhân viên vận hành"]
+
+    subgraph SYS["UAV Delivery Simulation System"]
+        UC01(["UC-01: Tạo đơn hàng"])
+        UC02(["UC-02: Phân công UAV"])
+        UC03(["UC-03: Start Mission"])
+        UC04(["UC-04: Xác nhận giao hàng"])
+        UC05(["UC-05: Tạm dừng và tiếp tục nhiệm vụ bay"])
+        UC06(["Giám sát Telemetry"])
+        UC07(["Xem lịch sử chuyến bay"])
+        UC08(["Xử lý sự cố"])
+        UC09(["Xem Dashboard"])
+    end
+
+    NV --- UC01
+    NV --- UC02
+    NV --- UC03
+    NV --- UC04
+    NV --- UC05
+    NV --- UC06
+    NV --- UC07
+    NV --- UC08
+    NV --- UC09
