@@ -1,0 +1,39 @@
+<style>
+  @import url(../templates/bucket.css);
+  #cesiumContainer { position:absolute; inset:0; width:100%; height:100%; }
+  #uavPanel {
+    position:absolute; top:15px; left:15px; width:310px; padding:16px;
+    border-radius:12px; background:rgba(15,23,42,0.94); color:white;
+    font:13px/1.45 system-ui,Arial,sans-serif; z-index:3;
+    box-shadow:0 6px 24px rgba(0,0,0,.28);
+  }
+  #uavPanel h3 { margin:0 0 3px; font-size:16px; color:#67e8f9; }
+  #uavPanel p {margin:5px 0 12px;color:#cbd5e1;font-size:11px;}
+  #uavPanel .stat { display:flex;justify-content:space-between;border-bottom:1px solid #334155;padding:4px 0;gap:8px; }
+  #uavPanel .stat strong {color:#f8fafc;white-space:nowrap;}
+  #uavPanel .actions {display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;}
+  #uavPanel button{border:none;border-radius:6px;padding:8px 11px;background:#0f766e;color:white;cursor:pointer;font-weight:600;}
+  #uavPanel button.secondary{background:#334155;}
+  #uavPanel button:hover{filter:brightness(1.15);}
+  @media(max-width:520px){#uavPanel{width:250px;padding:10px;top:7px;left:7px;}}
+</style>
+<div id="cesiumContainer"></div>
+<div id="uavPanel">
+  <h3>UAV DELIVERY · Day 8</h3>
+  <p>Station 01 · UAV-01 / UAV-02 / UAV-03 · DEMO 8×</p>
+  <div class="stat"><span>Flight state</span><strong id="flightStatus">IDLE</strong></div>
+  <div class="stat"><span>Battery</span><strong id="batteryValue">90% (toy)</strong></div>
+  <div class="stat"><span>Altitude</span><strong id="altitudeValue">0 m</strong></div>
+  <div class="stat"><span>Distance</span><strong id="distanceValue">0 m</strong></div>
+  <div class="stat"><span>Progress</span><strong id="progressValue">0%</strong></div>
+  <div class="stat"><span>Simulated time</span><strong id="timeValue">0 s</strong></div>
+  <div class="actions">
+    <button id="startBtn">Start</button>
+    <button id="pauseBtn" class="secondary">Pause</button>
+    <button id="resumeBtn" class="secondary">Resume</button>
+    <button id="resetBtn" class="secondary">Reset</button>
+    <button id="focusBtn" class="secondary">Focus UAV</button>
+    <button id="overviewBtn" class="secondary">Overview</button>
+  </div>
+  <p style="margin-top:10px">No real UAV, backend, or autopilot. Flight and battery values are simplified mock data.</p>
+</div>

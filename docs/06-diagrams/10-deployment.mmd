@@ -1,8 +1,18 @@
 flowchart TB
-  Browser["Web Browser"] --> Server["Backend + Simulator Host"]
-  Android["Android App - Capacitor"] --> Server
-  Windows["Windows App - Electron"] --> Server
-  Server --> DB[("PostgreSQL Host")]
-  Browser --> Cesium["Cesium / Map Data"]
-  Android --> Cesium
-  Windows --> Cesium
+    subgraph DEV["Thiết bị người dùng"]
+        PC["Windows PC - Chrome/Edge: Web"]
+        WIN["Windows PC - Electron Desktop"]
+        PHONE["Android - Capacitor App"]
+    end
+    subgraph HOST["Máy chủ Demo / PC chạy Backend"]
+        NODE["Node.js process: Express + Socket.IO + Simulation Engine"]
+        PG[("PostgreSQL - local hoặc dịch vụ khác")]
+        NODE <-->|"SQL"| PG
+    end
+    MAP["Nguồn dữ liệu bản đồ 3D (nếu sử dụng)"]
+    PC <-->|"HTTP(S) / Socket.IO"| NODE
+    WIN <-->|"HTTP(S) / Socket.IO"| NODE
+    PHONE <-->|"HTTP(S) / Socket.IO qua mạng"| NODE
+    PC -.->|"Tải dữ liệu bản đồ"| MAP
+    WIN -.-> MAP
+    PHONE -.-> MAP

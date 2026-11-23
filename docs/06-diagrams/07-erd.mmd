@@ -1,12 +1,97 @@
 erDiagram
-  USERS ||--o{ ORDERS : creates
-  STATIONS ||--o{ DRONES : hosts
-  DRONE_MODELS ||--o{ DRONES : defines
-  DELIVERY_POINTS ||--o{ ORDERS : receives
-  ORDERS ||--o{ MISSIONS : attempts
-  DRONES ||--o{ MISSIONS : performs
-  MISSIONS ||--o{ WAYPOINTS : routes
-  MISSIONS ||--o{ TELEMETRY : records
-  MISSIONS ||--o{ INCIDENTS : encounters
-  MISSIONS ||--o{ DELIVERY_CONFIRMATIONS : documents
-  DRONES ||--o{ DRONE_EVENTS : emits
+    USERS ||--o{ ORDERS : creates
+    DRONE_MODELS ||--o{ DRONES : defines
+    STATIONS ||--o{ DRONES : hosts
+    DELIVERY_POINTS ||--o{ ORDERS : receives
+    ORDERS ||--o{ MISSIONS : attempted_by
+    DRONES ||--o{ MISSIONS : performs
+    STATIONS ||--o{ MISSIONS : launches
+    MISSIONS ||--o{ WAYPOINTS : contains
+    DRONES ||--o{ TELEMETRY : reports
+    MISSIONS |o--o{ TELEMETRY : produces
+    DRONES ||--o{ DRONE_EVENTS : logs
+    MISSIONS |o--o{ DRONE_EVENTS : related
+    MISSIONS |o--o{ INCIDENTS : raises
+    DRONES ||--o{ INCIDENTS : experiences
+    MISSIONS ||--o| DELIVERY_CONFIRMATIONS : confirms
+    ORDERS ||--o{ DELIVERY_CONFIRMATIONS : receives
+
+    USERS {
+        string id PK
+        string email
+        string full_name
+        string role
+    }
+    STATIONS {
+        string id PK
+        string name
+        float latitude
+        float longitude
+    }
+    DRONE_MODELS {
+        string id PK
+        string name
+        decimal max_payload_kg
+        decimal cruise_speed_mps
+    }
+    DELIVERY_POINTS {
+        string id PK
+        string name
+        float latitude
+        float longitude
+    }
+    DRONES {
+        string id PK
+        string model_id FK
+        string station_id FK
+        decimal battery_pct
+        string status
+    }
+    ORDERS {
+        string id PK
+        string delivery_point_id FK
+        string created_by FK
+        decimal weight_kg
+        string status
+    }
+    MISSIONS {
+        string id PK
+        string order_id FK
+        string drone_id FK
+        string station_id FK
+        string status
+        int version
+    }
+    WAYPOINTS {
+        string id PK
+        string mission_id FK
+        int sequence_no
+        float x_m
+        float y_m
+        float altitude_m
+    }
+    TELEMETRY {
+        int id PK
+        string drone_id FK
+        string mission_id FK
+        float sim_time_s
+        decimal battery_pct
+    }
+    DRONE_EVENTS {
+        int id PK
+        string drone_id FK
+        string mission_id FK
+        string event_type
+    }
+    INCIDENTS {
+        string id PK
+        string drone_id FK
+        string mission_id FK
+        string severity
+    }
+    DELIVERY_CONFIRMATIONS {
+        string id PK
+        string order_id FK
+        string mission_id FK
+        boolean successful
+    }

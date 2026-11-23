@@ -1,5 +1,9 @@
 flowchart LR
-  Operator["Nhân viên điều phối"] --> System["UAV Delivery Simulation System"]
-  System --> Operator
-  System --> MapService["Map/Terrain Provider"]
-  MapService --> System
+    OP["Nhân viên vận hành UAV"]
+    MAP["Dịch vụ dữ liệu bản đồ 3D (tùy chọn)"]
+    subgraph S["UAV Delivery Simulation System"]
+        SYS["Điều phối, giám sát và mô phỏng đội UAV"]
+    end
+    OP -->|"Đơn hàng, waypoint, lệnh"| SYS
+    SYS -->|"Dashboard, telemetry, cảnh báo"| OP
+    MAP -->|"Địa hình, imagery, 3D tiles"| SYS

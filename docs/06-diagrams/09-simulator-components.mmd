@@ -1,11 +1,26 @@
 flowchart TB
-  Command["Validated Command"] --> FC["Virtual Flight Controller"]
-  FC --> FSM["State Machine"]
-  FC --> Nav["Navigation / Waypoints"]
-  FC --> Motion["Motion Model"]
-  Motion --> Sensor["Virtual Sensors"]
-  Motion --> Battery["Battery Model"]
-  Sensor --> Safety["Safety Manager"]
-  Battery --> Safety
-  Safety --> FC
-  FC --> Events["Telemetry + Event Log"]
+    COMMAND["Command Service (nhận lệnh hợp lệ từ Backend)"]
+    subgraph SIM["Simulation Engine - độc lập với giao diện"]
+        SCH["Fixed-step Scheduler (tick 100 ms)"]
+        CTRL["Virtual Flight Controller"]
+        FSM["State Machine"]
+        NAV["Navigation / Waypoint"]
+        MOT["Motion Model"]
+        BAT["Battery Model"]
+        SENSOR["Virtual Sensors - GPS/IMU/Altitude"]
+        SAFE["Safety Manager"]
+        OUT["Telemetry & Event Stream"]
+        SCH --> CTRL
+        CTRL --> FSM
+        CTRL --> NAV
+        NAV --> MOT
+        CTRL --> BAT
+        MOT --> SENSOR
+        BAT --> SAFE
+        SENSOR --> SAFE
+        SAFE --> CTRL
+        CTRL --> OUT
+    end
+    COMMAND --> CTRL
+    OUT --> RT["Socket.IO Gateway"]
+    OUT --> STORE["Event log / Checkpoint adapter"]

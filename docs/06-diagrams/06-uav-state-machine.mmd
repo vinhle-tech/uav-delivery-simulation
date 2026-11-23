@@ -1,17 +1,28 @@
+
 stateDiagram-v2
-  [*] --> IDLE
-  IDLE --> PRE_FLIGHT: Start
-  PRE_FLIGHT --> TAKEOFF: Passed
-  PRE_FLIGHT --> FAILED: Rejected
-  TAKEOFF --> EN_ROUTE: Height reached
-  EN_ROUTE --> APPROACH: Target near
-  APPROACH --> LANDING: Landing safe
-  LANDING --> HANDOVER: Landed
-  HANDOVER --> RETURN_HOME: Delivery resolved
-  RETURN_HOME --> COMPLETED: At station
-  COMPLETED --> IDLE: Reset
-  EN_ROUTE --> PAUSED: Pause allowed
-  PAUSED --> EN_ROUTE: Resume
-  EN_ROUTE --> EMERGENCY: Critical fault
-  RETURN_HOME --> EMERGENCY: Critical fault
-  EMERGENCY --> FAILED: Terminated
+    [*] --> IDLE
+
+    IDLE --> PRE_FLIGHT_CHECK: START
+    PRE_FLIGHT_CHECK --> TAKEOFF: Checks OK
+    PRE_FLIGHT_CHECK --> FAILED: Checks Failed
+
+    TAKEOFF --> EN_ROUTE: Reached Altitude
+
+    EN_ROUTE --> PAUSED: PAUSE
+    PAUSED --> EN_ROUTE: RESUME
+
+    EN_ROUTE --> APPROACH: Destination Reached
+    APPROACH --> LANDING: Landing Allowed
+    LANDING --> WAITING_FOR_HANDOVER: Landed
+
+    WAITING_FOR_HANDOVER --> RETURNING: Delivery Resolved
+    EN_ROUTE --> RETURNING: Return Home
+
+    RETURNING --> COMPLETED: Arrived Home
+
+    EN_ROUTE --> EMERGENCY_LANDING: Cannot Return Home
+    RETURNING --> EMERGENCY_LANDING: Unsafe Return
+    EMERGENCY_LANDING --> FAILED: Emergency Landing Done
+
+    COMPLETED --> [*]
+    FAILED --> [*]

@@ -1,16 +1,26 @@
 flowchart TB
-  subgraph Clients["Ứng dụng dùng chung nghiệp vụ"]
-    Web["React Web"]
-    Mobile["React + Capacitor"]
-    Desktop["React + Electron"]
-  end
-  Web --> API["Express Backend"]
-  Mobile --> API
-  Desktop --> API
-  API --> Database[(PostgreSQL)]
-  API --> Simulation["Server Simulation Engine"]
-  Simulation --> Database
-  Simulation --> Socket["Socket.IO Realtime"]
-  Socket --> Web
-  Socket --> Mobile
-  Socket --> Desktop
+    subgraph C["CLIENT - cùng chức năng nghiệp vụ"]
+        WEB["Web - React"]
+        AND["Android - React + Capacitor"]
+        DESK["Windows - React + Electron"]
+        UI["Shared UI / API Client"]
+        WEB --- UI
+        AND --- UI
+        DESK --- UI
+    end
+    subgraph B["SERVER - Node.js"]
+        API["REST API / Auth / Validation"]
+        CMD["Mission Command Service / Concurrency Guard"]
+        ENG["Simulation Engine"]
+        RT["Socket.IO Gateway"]
+        REPO["Persistence Adapter"]
+        API --> CMD
+        CMD --> ENG
+        ENG --> RT
+        CMD --> REPO
+        ENG --> REPO
+    end
+    PG[("PostgreSQL")]
+    UI -->|"HTTP REST: lệnh, CRUD"| API
+    RT -->|"Realtime: trạng thái, telemetry"| UI
+    REPO <-->|"SQL / transaction"| PG
