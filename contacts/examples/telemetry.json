@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "source": "WOKWI_ESP32",
+  "deviceId": "uav-01",
+  "seq": 1,
+  "uptimeMs": 1000,
+  "batterySimPct": 78,
+  "imu": { "ax": 0.1, "ay": 0.03, "az": 9.81 },
+  "motorPwm": [0, 0, 0, 0],
+  "cargoLock": "LOCKED"
+}

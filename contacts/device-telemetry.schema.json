@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UAV Embedded Telemetry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "source",
+    "deviceId",
+    "seq",
+    "uptimeMs",
+    "batterySimPct",
+    "imu",
+    "motorPwm",
+    "cargoLock"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "source": {
+      "const": "WOKWI_ESP32"
+    },
+    "deviceId": {
+      "type": "string",
+      "pattern": "^uav-[0-9]{2}$"
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "uptimeMs": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "batterySimPct": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "imu": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ax",
+        "ay",
+        "az"
+      ],
+      "properties": {
+        "ax": {
+          "type": "number"
+        },
+        "ay": {
+          "type": "number"
+        },
+        "az": {
+          "type": "number"
+        }
+      }
+    },
+    "motorPwm": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 255
+      }
+    },
+    "cargoLock": {
+      "enum": [
+        "LOCKED",
+        "UNLOCKED"
+      ]
+    }
+  }
+}

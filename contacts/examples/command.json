@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "commandId": "cmd-example-001",
+  "deviceId": "uav-01",
+  "type": "SET_CARGO_LOCK",
+  "value": "UNLOCK"
+}

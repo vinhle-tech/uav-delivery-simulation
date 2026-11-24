@@ -1,0 +1,14 @@
+{
+  "name": "uav-mqtt-spike",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "probe": "node mqtt-probe.mjs",
+    "watch": "node mqtt-watch.mjs"
+  },
+  "dependencies": {
+    "mqtt": "^5.14.0",
+    "dotenv": "^17.2.0"
+  }
+}
