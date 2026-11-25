@@ -1,0 +1,11 @@
+flowchart TD
+  UI[React / CesiumJS] <-->|REST and snapshots| API[Express / Flight Sync]
+  UI <-->|Socket.IO device events| Bridge[MQTT Bridge]
+  API <--> Core[Simulation Core UAV-01 in RAM]
+  API <--> Bridge
+  Bridge <-->|MQTT v2 TLS| Broker[EMQX Cloud]
+  Broker <--> ESP[ESP32 Wokwi]
+  ESP --> IO[MPU6050 / ADC / PWM LEDs / Servo / Buzzer]
+  UI --> Local[UAV-02 local Core; UAV-03 offline]
+  API --> Legacy[Legacy business REST API]
+  Legacy <--> DB[(PostgreSQL)]

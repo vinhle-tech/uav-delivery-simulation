@@ -34,7 +34,17 @@ foreach ($step in $transitions) {
   Write-Host "$($step.action) => $($mission.status) (version=$($mission.version))"
   if ($mission.status -ne $step.expected) { throw "Expected $($step.expected), got $($mission.status)" }
 }
-$check = (Invoke-RestMethod -Uri "$base/api/drones" | Where-Object { $_.id -eq 'uav-01' } | Select-Object -First 1)
+
+$allDrones = Invoke-RestMethod -Uri "$base/api/drones"
+
+$check = $allDrones |
+    Where-Object { $_.id -eq 'uav-01' } |
+    Select-Object -First 1
+
+if ($null -eq $check) {
+    throw "uav-01 not found in API response."
+}
+
 if ($check.status -ne 'AVAILABLE') { throw "Expected drone AVAILABLE, got $($check.status)" }
 Write-Host "PASS: Mission $($mission.id) completed. Drone AVAILABLE." -ForegroundColor Green
 Write-Host "NOTE: Demo Order remains ASSIGNED; real delivery confirmation is NOT implemented."

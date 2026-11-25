@@ -1,0 +1,6 @@
+PubSubClient
+ArduinoJson
+Adafruit MPU6050
+Adafruit Unified Sensor
+Adafruit BusIO
+ESP32Servo

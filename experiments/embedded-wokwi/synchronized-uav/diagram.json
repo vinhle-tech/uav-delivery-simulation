@@ -1,0 +1,359 @@
+{
+  "version": 1,
+  "author": "UAV Delivery System",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-esp32-devkit-v1",
+      "id": "esp",
+      "top": 182,
+      "left": 115,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-mpu6050",
+      "id": "imu1",
+      "top": -85,
+      "left": 30,
+      "attrs": {
+        "accelX": "0",
+        "accelY": "0",
+        "accelZ": "1"
+      }
+    },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "pot1",
+      "top": 240,
+      "left": -170,
+      "attrs": {
+        "value": "800"
+      }
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo1",
+      "top": 210,
+      "left": 460,
+      "attrs": {
+        "horn": "single"
+      }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "buzz1",
+      "top": 355,
+      "left": 460,
+      "attrs": {
+        "volume": "0.20"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "motor1",
+      "top": -105,
+      "left": 255,
+      "attrs": {
+        "color": "blue",
+        "label": "M1 PWM",
+        "gamma": "1.0"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "motor2",
+      "top": -105,
+      "left": 325,
+      "attrs": {
+        "color": "blue",
+        "label": "M2 PWM",
+        "gamma": "1.0"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "motor3",
+      "top": -105,
+      "left": 395,
+      "attrs": {
+        "color": "blue",
+        "label": "M3 PWM",
+        "gamma": "1.0"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "motor4",
+      "top": -105,
+      "left": 465,
+      "attrs": {
+        "color": "blue",
+        "label": "M4 PWM",
+        "gamma": "1.0"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "alarmLed",
+      "top": 50,
+      "left": 505,
+      "attrs": {
+        "color": "red",
+        "label": "LOW BAT"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "onlineLed",
+      "top": 110,
+      "left": 505,
+      "attrs": {
+        "color": "green",
+        "label": "MQTT ONLINE"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "resM1",
+      "top": -41,
+      "left": 255,
+      "rotate": 90,
+      "attrs": {
+        "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "resM2",
+      "top": -41,
+      "left": 325,
+      "rotate": 90,
+      "attrs": {
+        "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "resM3",
+      "top": -41,
+      "left": 395,
+      "rotate": 90,
+      "attrs": {
+        "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "resM4",
+      "top": -41,
+      "left": 465,
+      "rotate": 90,
+      "attrs": {
+        "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "resAlarm",
+      "top": 82,
+      "left": 500,
+      "rotate": 90,
+      "attrs": {
+        "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "resOnline",
+      "top": 142,
+      "left": 500,
+      "rotate": 90,
+      "attrs": {
+        "value": "220"
+      }
+    }
+  ],
+  "connections": [
+    [
+      "esp:3V3",
+      "imu1:VCC",
+      "red",
+      []
+    ],
+    [
+      "esp:GND.1",
+      "imu1:GND",
+      "black",
+      []
+    ],
+    [
+      "esp:D21",
+      "imu1:SDA",
+      "green",
+      []
+    ],
+    [
+      "esp:D22",
+      "imu1:SCL",
+      "blue",
+      []
+    ],
+    [
+      "esp:3V3",
+      "pot1:VCC",
+      "red",
+      []
+    ],
+    [
+      "esp:GND.1",
+      "pot1:GND",
+      "black",
+      []
+    ],
+    [
+      "esp:D34",
+      "pot1:SIG",
+      "green",
+      []
+    ],
+    [
+      "esp:VIN",
+      "servo1:V+",
+      "red",
+      []
+    ],
+    [
+      "esp:GND.1",
+      "servo1:GND",
+      "black",
+      []
+    ],
+    [
+      "esp:D18",
+      "servo1:PWM",
+      "orange",
+      []
+    ],
+    [
+      "esp:GND.1",
+      "buzz1:1",
+      "black",
+      []
+    ],
+    [
+      "esp:D23",
+      "buzz1:2",
+      "orange",
+      []
+    ],
+    [
+      "esp:D5",
+      "resAlarm:2",
+      "red",
+      []
+    ],
+    [
+      "resAlarm:1",
+      "alarmLed:A",
+      "red",
+      []
+    ],
+    [
+      "alarmLed:C",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "esp:D19",
+      "resOnline:2",
+      "green",
+      []
+    ],
+    [
+      "resOnline:1",
+      "onlineLed:A",
+      "green",
+      []
+    ],
+    [
+      "onlineLed:C",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "esp:D25",
+      "resM1:2",
+      "blue",
+      []
+    ],
+    [
+      "resM1:1",
+      "motor1:A",
+      "blue",
+      []
+    ],
+    [
+      "motor1:C",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "esp:D26",
+      "resM2:2",
+      "blue",
+      []
+    ],
+    [
+      "resM2:1",
+      "motor2:A",
+      "blue",
+      []
+    ],
+    [
+      "motor2:C",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "esp:D27",
+      "resM3:2",
+      "blue",
+      []
+    ],
+    [
+      "resM3:1",
+      "motor3:A",
+      "blue",
+      []
+    ],
+    [
+      "motor3:C",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "esp:D14",
+      "resM4:2",
+      "blue",
+      []
+    ],
+    [
+      "resM4:1",
+      "motor4:A",
+      "blue",
+      []
+    ],
+    [
+      "motor4:C",
+      "esp:GND.1",
+      "black",
+      []
+    ]
+  ],
+  "dependencies": {}
+}

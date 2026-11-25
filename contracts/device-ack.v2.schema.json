@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UAV Embedded Command Acknowledgement v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "deviceId",
+    "commandId",
+    "status",
+    "reason",
+    "cargoLock",
+    "deviceMode",
+    "bootId"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 2
+    },
+    "deviceId": {
+      "const": "uav-01"
+    },
+    "commandId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "status": {
+      "enum": [
+        "ACK",
+        "NACK"
+      ]
+    },
+    "reason": {
+      "type": "string"
+    },
+    "cargoLock": {
+      "enum": [
+        "LOCKED",
+        "UNLOCKED"
+      ]
+    },
+    "deviceMode": {
+      "enum": [
+        "IDLE",
+        "EN_ROUTE",
+        "PAUSED",
+        "WAITING_FOR_HANDOVER",
+        "RETURNING",
+        "SAFE_STOP"
+      ]
+    },
+    "bootId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,100}$"
+    }
+  }
+}

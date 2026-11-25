@@ -1,0 +1,17 @@
+sequenceDiagram
+  participant W as Web
+  participant B as Backend Flight Sync
+  participant M as EMQX
+  participant E as ESP32 Wokwi
+  W->>B: START
+  B->>B: Validate flight and device
+  B->>M: Mode command with commandId and bootId
+  M->>E: Command
+  E->>M: ACK or NACK
+  M->>B: ACK or NACK
+  E->>M: Telemetry v2
+  M->>B: Telemetry confirms mode
+  B->>B: Advance simulation only if synchronized
+  W->>B: Read flight snapshot
+  B-->>W: Current flight state
+  Note over B,E: Fault or timeout: freeze simulation and safe-stop proxy

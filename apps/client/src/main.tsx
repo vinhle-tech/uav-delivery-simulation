@@ -1,10 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import 'cesium/Build/Cesium/Widgets/widgets.css';
-import './styles.css';
-import './styles-day3.css';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "cesium/Build/Cesium/Widgets/widgets.css";
+import "./styles.css";
+import "./styles-day3.css";
+import App from "./App";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode><App /></React.StrictMode>,
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
 );

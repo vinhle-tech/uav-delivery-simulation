@@ -1,0 +1,2 @@
+# Evidence — Phase 2
+Lưu log/ảnh thật, không chứa secret. Đề xuất: audit.txt, audit-live.txt, core-tests.txt, core-demo.txt, backend-tests.txt, api-tests.txt, socket-test.txt, mission-flow.txt, client-build.txt, architecture.png, wokwi-circuit.png, takeoff.png, paused.png, handover.png, completed.png, fault-low-battery.png, fault-offline.png, heartbeat.png, clean-clone.txt. Video: flight-demo.mp4 và realtime-safety.mp4 hoặc link riêng tư trong report. Không commit video lớn nếu không cần; kiểm tra quyền truy cập link. Không coi hình minh họa là evidence.

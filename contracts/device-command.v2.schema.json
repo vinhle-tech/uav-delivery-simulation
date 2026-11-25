@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UAV Embedded Command v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "commandId",
+    "deviceId",
+    "type",
+    "value",
+    "bootId"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 2
+    },
+    "commandId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "deviceId": {
+      "const": "uav-01"
+    },
+    "type": {
+      "enum": [
+        "SET_CARGO_LOCK",
+        "SET_FLIGHT_MODE"
+      ]
+    },
+    "value": {
+      "type": "string"
+    },
+    "bootId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,100}$"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "SET_CARGO_LOCK"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "value": {
+            "enum": [
+              "LOCK",
+              "UNLOCK"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "SET_FLIGHT_MODE"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "value": {
+            "enum": [
+              "IDLE",
+              "EN_ROUTE",
+              "PAUSED",
+              "WAITING_FOR_HANDOVER",
+              "RETURNING",
+              "SAFE_STOP"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

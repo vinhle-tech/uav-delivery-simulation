@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UAV Embedded Telemetry v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "source",
+    "deviceId",
+    "seq",
+    "uptimeMs",
+    "batterySimPct",
+    "imu",
+    "motorPwm",
+    "cargoLock",
+    "bootId",
+    "deviceMode",
+    "imuReady"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 2
+    },
+    "source": {
+      "const": "WOKWI_ESP32"
+    },
+    "deviceId": {
+      "const": "uav-01"
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "uptimeMs": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "batterySimPct": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "imu": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ax",
+        "ay",
+        "az"
+      ],
+      "properties": {
+        "ax": {
+          "type": "number"
+        },
+        "ay": {
+          "type": "number"
+        },
+        "az": {
+          "type": "number"
+        }
+      }
+    },
+    "motorPwm": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 255
+      }
+    },
+    "cargoLock": {
+      "enum": [
+        "LOCKED",
+        "UNLOCKED"
+      ]
+    },
+    "bootId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,100}$"
+    },
+    "deviceMode": {
+      "enum": [
+        "IDLE",
+        "EN_ROUTE",
+        "PAUSED",
+        "WAITING_FOR_HANDOVER",
+        "RETURNING",
+        "SAFE_STOP"
+      ]
+    },
+    "imuReady": {
+      "type": "boolean"
+    }
+  }
+}
