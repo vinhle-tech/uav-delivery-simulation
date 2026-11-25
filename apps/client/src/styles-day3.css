@@ -1,0 +1,23 @@
+/* DAY 3 additions; imported in main.tsx after styles.css. */
+.status-line{font-size:12px;background:#12283a;border-bottom:1px solid #23445b;color:#9cf3df;padding:9px 18px;min-height:34px}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.control{border:1px solid #36516b;border-radius:9px;background:#1c344d;color:#f1f5f9;padding:11px 8px;font-size:11px;font-weight:750;text-align:center;line-height:1.3;min-height:42px}
+.control:hover:not(:disabled){border-color:#5eead4;background:#25516a}
+.control.primary{background:#0f766e;color:#fff}
+.control.success{background:#166534;color:white}
+.control.danger{background:#7f1d1d;color:white}
+.control.wide{grid-column:1/-1}
+.control:disabled{opacity:.35;cursor:not-allowed}
+.speed-list{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.speed-button{background:#14243a;border:1px solid #38516b;border-radius:9px;padding:10px;color:#cbd5e1}
+.speed-button.selected{border-color:#2dd4bf;background:#10564e;color:#f0fdfa;font-weight:750}
+.footnote{font-size:10px;color:#94a3b8;margin-top:9px}
+.map-buttons{position:absolute;top:14px;left:14px;display:flex;gap:8px;flex-wrap:wrap}
+.map-buttons .overview-btn{position:static}
+.overview-btn.following{border-color:#2dd4bf;background:#0f766e}
+.state-value{color:#2dd4bf}
+.coords{font-size:10px}
+.event-log{display:grid;gap:8px;font-size:10px;line-height:1.5;color:#a5c8d6;max-height:200px;overflow-y:auto}
+.event-log>div{padding:7px 9px;border-left:2px solid #0d9488;background:#132b3d;border-radius:3px}
+.error-note{margin-top:10px;color:#fecaca;background:#6b1f27;padding:10px;border-radius:7px;font-size:11px}
+@media(max-width:730px){.map-buttons{top:8px;left:8px}.map-buttons .overview-btn{padding:7px;font-size:11px}}

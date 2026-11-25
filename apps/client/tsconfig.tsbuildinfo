@@ -1,1 +1,1 @@
-{"root":["./src/app.tsx","./src/main.tsx","./src/data/demo.ts","./src/map/cesiummap.tsx","./src/types/domain.ts","./vite.config.ts"],"version":"5.9.3"}
+{"root":["./src/app.tsx","./src/main.tsx","./src/data/demo.ts","./src/data/flightconfigs.ts","./src/map/cesiummap.tsx","./src/types/domain.ts","./vite.config.ts"],"version":"5.9.3"}
