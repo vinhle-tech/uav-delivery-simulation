@@ -6,7 +6,7 @@ const asyncRoute=fn=>(req,res,next)=>Promise.resolve().then(()=>fn(req,res)).cat
 function cors(req,res,next){
  const origin=req.headers.origin;
  if(origin&&!origins.has(origin))return fail(res,403,'ORIGIN_NOT_ALLOWED','Origin không được phép');
- if(origin){res.setHeader('Access-Control-Allow-Origin',origin);res.vary('Origin');res.setHeader('Access-Control-Allow-Methods','GET,POST,OPTIONS');res.setHeader('Access-Control-Allow-Headers','Content-Type');}
+ if(origin){res.setHeader('Access-Control-Allow-Origin',origin);res.vary('Origin');res.setHeader('Access-Control-Allow-Methods','GET,POST,OPTIONS');res.setHeader('Access-Control-Allow-Headers','Content-Type, Authorization');}
  if(req.method==='OPTIONS')return res.sendStatus(204);next();
 }
 function errorHandler(err,req,res,next){

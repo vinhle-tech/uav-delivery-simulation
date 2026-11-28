@@ -1,7 +1,7 @@
 const fs=require('node:fs');const path=require('node:path');const {createHash}=require('node:crypto');
 const {pool,assertTestDb}=require('../src/db');
 const root=path.resolve(__dirname,'../../..','database');
-const files=['migrations/001_baseline.sql','seeds/001_demo.sql'];
+const files=['migrations/001_baseline.sql','seeds/001_demo.sql','migrations/002_auth.sql'];
 (async()=>{const db=await pool.connect();try{
  await assertTestDb(db);await db.query('BEGIN');await db.query('SELECT pg_advisory_xact_lock(730031)');
  const exists=await db.query("SELECT to_regclass('public.schema_migrations') AS ledger");

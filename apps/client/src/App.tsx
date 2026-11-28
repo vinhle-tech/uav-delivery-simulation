@@ -5,6 +5,7 @@ import {
   type CommandOptions,
   type SimulationSnapshot,
 } from "@uav/simulation-core";
+import AuthGate, { AccountBar } from "./auth/AuthGate";
 import CesiumMap from "./map/CesiumMap";
 import DevicePanel from "./device/DevicePanel";
 import { useSyncedFlight } from "./device/useSyncedFlight";
@@ -34,6 +35,14 @@ function formatTime(sec: number): string {
 }
 
 export default function App() {
+  return (
+    <AuthGate>
+      <FlightDashboard />
+    </AuthGate>
+  );
+}
+
+function FlightDashboard() {
   const enginesRef = useRef<Record<string, SimulationEngine> | null>(null);
   if (!enginesRef.current) enginesRef.current = createEngines();
 
@@ -131,7 +140,8 @@ export default function App() {
           </div>
         </div>
         <div className="side-scroll">
-          <div className="eyebrow">GIAI ĐOẠN 2 · NGÀY 6</div>
+          <AccountBar />
+          <div className="eyebrow">GIAI ĐOẠN 3 · AUTHENTICATION</div>
           <h1>Mô phỏng UAV 3D</h1>
           <p className="muted">
             UAV-01 chạy trên Backend và đồng bộ Wokwi; UAV-02 chạy cục bộ;
