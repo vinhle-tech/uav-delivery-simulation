@@ -1,0 +1,25 @@
+{
+  "name": "uav-database-api-lab",
+  "version": "1.0.0",
+  "private": true,
+  "description": "UAV Delivery local simulation backend (Phase 3; auth pending)",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "listen": "node src/socket-listener.js",
+    "migrate": "node scripts/migrate.cjs",
+    "test:unit": "node --test tests/device-state.test.cjs tests/flight-sync.test.cjs",
+    "test:db": "node --test tests/database-constraints.test.cjs",
+    "test:api": "node --test tests/api-smoke.test.js",
+    "test:socket": "node tests/socket-smoke.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "express": "^5.1.0",
+    "mqtt": "^5.16.1",
+    "pg": "^8.16.3",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1"
+  }
+}

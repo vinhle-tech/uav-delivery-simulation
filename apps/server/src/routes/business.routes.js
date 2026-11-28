@@ -1,0 +1,13 @@
+const {asyncRoute}=require('../middlewares/http');
+const controller=require('../controllers/business.controller');
+module.exports=(app,io)=>{const c=controller(io);
+ app.get('/health',asyncRoute(c.health));
+ app.get('/api/drones',asyncRoute(c.drones));
+ app.get('/api/orders',asyncRoute(c.orders));
+ app.post('/api/orders',asyncRoute(c.createOrder));
+ app.get('/api/missions',asyncRoute(c.missions));
+ app.get('/api/missions/:id',asyncRoute(c.mission));
+ app.post('/api/missions',asyncRoute(c.createMission));
+ app.post('/api/missions/:id/:action',asyncRoute(c.transition));
+ app.post('/api/demo/telemetry',asyncRoute(c.telemetry));
+};
